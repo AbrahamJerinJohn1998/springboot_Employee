@@ -30,5 +30,10 @@ public class employeecontroller {
     {
         return "Delete  employee";
     }
+    @GetMapping("/view")
+    public String view()
+    {
+        return "View all  employee";
+    }
 
 }
