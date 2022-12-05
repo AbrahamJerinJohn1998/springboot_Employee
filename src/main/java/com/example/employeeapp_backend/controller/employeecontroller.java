@@ -20,5 +20,10 @@ public class employeecontroller {
     {
         return "Search employee";
     }
+    @GetMapping("/edit")
+    public String edit()
+    {
+        return "Edit  employee";
+    }
 
 }
