@@ -1,40 +1,51 @@
 package com.example.employeeapp_backend.controller;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.employeeapp_backend.controller.model.Employee;
+import com.example.employeeapp_backend.dao.EmployeeDao;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class employeecontroller {
-    @PostMapping("/")
+    @Autowired
+    private EmployeeDao dao;
+    @CrossOrigin(origins = "*")
+    @GetMapping("/")
     public String homepage()
     {
         return "Welcome Home page";
     }
-    @PostMapping("/add")
-    public String add()
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/add",consumes = "application/json",produces = "application/json")
+    public String add(@RequestBody Employee e)
     {
-        return "Welcome Employee add page";
+        System.out.println(e.getName().toString());
+        System.out.println(e.getDesignation().toString());
+        System.out.println(e.getSalary());
+        System.out.println(e.getPhoneNo().toString());
+        System.out.println(e.getEmail().toString());
+        System.out.println(e.getCname().toString());
+        System.out.println(e.getYearOfExpereince());
+        dao.save(e);
+        return "Employee added";
     }
-    @PostMapping("/search")
-    public String search()
+    @CrossOrigin(origins = "*")
+    @GetMapping("/view")
+    public List<Employee> view()
+
     {
-        return "Search employee";
+        return (List<Employee>) dao.findAll();
     }
-    @PostMapping("/edit")
-    public String edit()
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/search",consumes = "application/json",produces = "application/json")
+     public List<Employee> searchEmployee(@RequestBody Employee e)
     {
-        return "Edit  employee";
-    }
-    @PostMapping("/delete")
-    public String delete()
-    {
-        return "Delete  employee";
-    }
-    @PostMapping("/view")
-    public String view()
-    {
-        return "View all  employee";
+     String code=String.valueOf(e.getCode());
+        System.out.println(code);
+        return (List<Employee>) dao.SearchEmployee(e.getCode());
     }
 
 }
