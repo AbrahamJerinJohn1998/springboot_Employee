@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface EmployeeDao extends CrudRepository<Employee,Integer> {
 
-    @Query(value = "SELECT `code`, `cname`, `designation`, `email`, `name`, `phone_no`, `salary`, `year_of_expereince` FROM `employeenewdb` WHERE 'code'=:code",nativeQuery = true)
+    @Query(value = "SELECT `id`, `cname`, `code`, `designation`, `email`, `name`, `phone_no`, `salary`, `year_of_expereince` FROM `employees` WHERE `code`=:code",nativeQuery = true)
     List<Employee> SearchEmployee(@Param("code")Integer code);
 }
 

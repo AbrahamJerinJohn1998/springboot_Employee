@@ -6,14 +6,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "employeenewdb")
+@Table(name = "employees")
 public class Employee {
     @Id
     @GeneratedValue
+
+    private int id;
     private int code;
     private String name;
     private String designation;
-    private  int salary;
+    private int salary;
     private String phoneNo;
     private String email;
     private String cname;
@@ -22,7 +24,8 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int code, String name, String designation, int salary, String phoneNo, String email, String cname, int yearOfExpereince) {
+    public Employee(int id, int code, String name, String designation, int salary, String phoneNo, String email, String cname, int yearOfExpereince) {
+        this.id = id;
         this.code = code;
         this.name = name;
         this.designation = designation;
@@ -31,6 +34,14 @@ public class Employee {
         this.email = email;
         this.cname = cname;
         this.yearOfExpereince = yearOfExpereince;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getCode() {
